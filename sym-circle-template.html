@@ -1,0 +1,12 @@
+<div id="container">
+	<?xml version="1.0"?>
+	<svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+		<!-- Circulo -->
+		<circle cx="60" cy="60" r="50" ng-style="{fill: config.BackgroundColor}"/>
+		<!-- Texto de fecha -->
+		<text id="texto1" x="20" y="58" font-family="Verdana" ng-style="{fill: config.TextColor}" ng-show="config.ShowDate" >{{ date }}</text>
+		<!-- Texto de tiempo -->
+		<text id="texto2" x="20" y="78" font-family="Verdana" ng-style="{fill: config.TextColor}" ng-show="config.ShowTime">{{ time }}</text>
+	</svg>
+	
+</div>
