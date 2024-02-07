@@ -1,0 +1,17 @@
+<div id="container" ng-style="{background: config.BackgroundColor, color: config.TextColor}" style="border-radius: 12px; width: 100%;">
+	<table style="width:100%">
+		<tr style="text-align:center; border: 1px solid black;" >
+			<td id="name" style="border: 1px solid; padding: 5px;" ng-style="{font-size: config.FontSize}">Name:</td>
+			<td id="labelValue" style="border: 1px solid; padding: 5px;" >{{label}}</td>
+		</tr>
+		<tr style="text-align:center; border: 1px solid black;">
+		  <th id="valueText" style="border: 1px solid; padding: 5px;; padding: 5px;" >Value:</th>
+		  <td id="textVal" style="border: 1px solid; padding: 5px;">{{value}}</td>
+		</tr>
+		<tr style="text-align:center; border: 1px solid black;">
+		  <td id="time" style="border: 1px solid; padding: 5px;" >Time: </td>
+		  <td id="timeValue" style="border: 1px solid; padding: 5px;" >{{time}}</td>
+		</tr>
+		
+	  </table>
+</div>

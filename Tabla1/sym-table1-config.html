@@ -1,0 +1,35 @@
+<!-- Cambiar el color del texto -->
+<div class="c-side-pane t-toolbar">
+    <span style="color:#fff; margin-left:15px">Text Color</span>
+</div>
+<div class="config-option-format">
+    <pv-color-picker id="textcolor" ng-model="config.TextColor"></pv-color-picker>
+</div> 
+<!-- Config del color de fondo -->
+<div class="c-side-pane t-toolbar">
+    <span style="color:#fff; margin-left:15px">Background Color</span>
+</div>
+<div class="config-option-format">
+    <pv-color-picker id="backgroundcolor" ng-model="config.BackgroundColor"></pv-color-picker>
+</div> 
+<!-- Config del tamaño de texto -->
+<div class="c-side-pane t-toolbar">
+    <span style="color:#fff; margin-left:15px">Text Size</span>
+</div>
+<div style="font-size: 14px; position:relative; margin: 6px 0;">
+    <font-resize ng-model="config.FontSize">Font size</font-resize>
+</div>
+<div class="c-side-pane t-toolbar">
+    <span style="color:#fff; margin-left:15px">Show Underline</span>
+</div>
+<!-- Config visibilidad del underline -->
+<div class="c-config-content">Show Underline:
+    <input type="checkbox" ng-model="config.ShowUnderline">
+</div>
+<div class="c-side-pane t-toolbar">
+    <span style="color:#fff; margin-left:15px">Show Blink</span>
+</div>
+<!-- Config visibilidad del underline -->
+<div class="c-config-content">Show Blink:
+    <input type="checkbox" ng-model="config.ShowBlink">
+</div>
