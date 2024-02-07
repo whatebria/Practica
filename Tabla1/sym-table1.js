@@ -6,7 +6,6 @@
 	symbolVis.prototype.init = function (scope, elem) {
         //Funcion que se llama cada vez que hay un cambio en la data
         this.onDataUpdate = dataUpdate;
-        this.onConfigChange = customConfig;
         
         function dataUpdate(data){
             if(data) {
@@ -32,25 +31,6 @@
                     }
                 }
             }
-
-            var name = elem.find('#name')[0];
-            var labelValue = elem.find('#labelValue')[0];
-            var valueText = elem.find('#valueText')[0];
-            // var textVal = elem.find('textVal')[0];
-            var time = elem.find('#time')[0];
-            var timeValue = elem.find('#timeValue')[0];
-
-            //Tamaño del texto
-            name.style.fontSize = scope.config.FontSize + 'px';
-            labelValue.style.fontSize = scope.config.FontSize + 'px';
-            valueText.style.fontSize = scope.config.FontSize + 'px';
-            // textVal.style.fontSize = scope.config.FontSize + 'px';
-            time.style.fontSize = scope.config.FontSize + 'px';
-            timeValue.style.fontSize = scope.config.FontSize + 'px';
-        }
-
-        function customConfig(newConfig){
-            
         }
 
         //Funcion que averigua si es entero o decimal
