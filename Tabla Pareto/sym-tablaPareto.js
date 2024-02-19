@@ -193,7 +193,9 @@
 			//Ordena de mayor a menor y suma los valores
 			ordenarObjetosPorPropiedad(copyTwoOfDatValueArray, 'Value');
 			copyOfAcumulativeArray = sumarElementosAcumulativa(copyTwoOfDatValueArray, 'Value');
-			var maximo = copyOfAcumulativeArray.at(-1);
+			var maximo = encontrarUltimoNumeroString(copyOfAcumulativeArray);
+			console.log(copyOfAcumulativeArray)
+
 			acumulativePercentArray = sacarPorcentajesAcumulados(copyOfAcumulativeArray, maximo);
 
 			//Recorre el array de datos, agrega una nueva celda y le agrega los porcentajes acumulados
@@ -209,6 +211,16 @@
 			
 
 			//FUNCIONES
+
+			
+			function esNumero(numero) {
+				// Primero, verifica si el dato es un número
+				if (typeof numero !== 'number') {
+				  return false;
+				}
+				// Luego, verifica si es un entero o un flotante
+				return Number.isInteger(numero) || !Number.isNaN(numero);
+			  }
 
 			//Ordenar el array de mayor a menor por una propiedad
 			function ordenarObjetosPorPropiedad(array, propiedad) {
@@ -232,6 +244,18 @@
 				return resultado;
 			  }
 
+			function encontrarUltimoNumeroString(array) {
+			for (let i = array.length - 1; i >= 0; i--) {
+				const elemento = array[i];
+				if (!isNaN(elemento) && elemento !== '') {
+				// Si el elemento es un número válido en formato string, devuelve su valor
+				return elemento;
+				}
+			}
+			// Si no se encuentra ningún número válido, devuelve null
+			return null;
+			}
+
 			//Saca los porcentajes acumulados dependiendo del ultimo objeto del array
 			function sacarPorcentajesAcumulados(array, maximo){
 
@@ -240,9 +264,8 @@
 				for (let i = 0; i < array.length - 1; i++) {
 					//Divide el dato en el valor maximo
 					resultado.push(Math.round((parseFloat(array[i + 1]) / maximo)*100));
-				  }
+				}
 				
-
 				return resultado;
 			}
 
