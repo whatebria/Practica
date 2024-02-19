@@ -18,12 +18,13 @@
 		// Create vars to hold the labels and units
 		
 		//ARRAY LABELS
+		var dataLabelArray = []
 		//ARRAY VALUES
 		var dataValueArray = [];
 		//ARRAY VALORES ACUMULADOS
 		var acumulativeArray = [];
 		//ARRAY DE VALORES 2
-		var copyOfDatValueArray = [];
+		var copyOfDateValueArray = [];
 		//ARRAY DE VALORES 3
 		var copyTwoOfDatValueArray = [];
 		//ARRAY DE PORCENTAJES ACUMULADOS
@@ -56,13 +57,16 @@
 			labelCell.style.backgroundColor = scope.config.labelBackgroundColor;
 			labelCell.style.color = scope.config.labelColor;
 
-			// Inicializar un array para almacenar las filas únicas de datos
-			var dataLabelArray = [];
 
-			// Recorre las filas viendo si el dato no está agregado; si no lo está, lo agrega al array
 			for (var i = 0; i < data.Rows.length; i++) {
-				if (!dataLabelArray.some(item => item === data.Rows[i])) {
-					dataLabelArray.push(data.Rows[i]);
+				var newCell = newRow.insertCell(-1);
+				// Check if the label exists; if it does, add it to the global array
+				if (data.Rows[i].Label) {
+					if(!dataLabelArray.includes(data.Rows[i].Label)){
+
+					dataLabelArray[i] = data.Rows[i];
+					}
+
 				}
 			}
 
@@ -80,8 +84,6 @@
 				newCell.style.color = scope.config.textColor;
 			}
 
-
-
 			//VALORES
 			//Fila
 			var newRow = symbolContainerDiv.insertRow(1);
@@ -96,13 +98,18 @@
 			labelCell.style.backgroundColor = scope.config.labelBackgroundColor;
 			labelCell.style.color = scope.config.labelColor;
 
-			//Recorre las filas viendo si el dato no esta agregado; si no lo está, lo agrega al array
 			for (var i = 0; i < data.Rows.length; i++) {
-				if(!dataValueArray.includes(data.Rows[i])){
+				var newCell = newRow.insertCell(-1);
+				// Check if the label exists; if it does, add it to the global array
+				if (data.Rows[i].Label) {
+					if(!dataValueArray.includes(data.Rows[i].Label)){
 					dataValueArray[i] = data.Rows[i];
+					}
 				}
 			}
+
 			ordenarObjetosPorPropiedad(dataValueArray, 'Value');
+
 
 			//Recorre el array de datos, agrega una nueva celda y le agrega el valor
 			for (var i = 0; i < dataValueArray.length; i++) {
@@ -116,8 +123,7 @@
 				newCell.style.color = scope.config.textColor;
 			}
 
-
-			//VALORES ACUMULADOS}
+			//VALORES ACUMULADOS
 			//Fila
 			var newRow = symbolContainerDiv.insertRow(2);
 			newRow.style.width = "100%";
@@ -131,18 +137,24 @@
 			labelCell.style.backgroundColor = scope.config.labelBackgroundColor;
 			labelCell.style.color = scope.config.labelColor;
 
-			//Recorre las filas viendo si el dato no esta agregado; si no lo está, lo agrega al array
 			for (var i = 0; i < data.Rows.length; i++) {
-				if(!copyOfDatValueArray.includes(data.Rows[i])){
-					copyOfDatValueArray[i] = data.Rows[i].Value;
+				var newCell = newRow.insertCell(-1);
+				// Check if the label exists; if it does, add it to the global array
+				if (data.Rows[i].Label) {
+					if(!copyOfDateValueArray.includes(data.Rows[i].Label)){
+						copyOfDateValueArray[i] = data.Rows[i];
+					}
 				}
 			}
+
+
 			//Ordena de mayor a menor y suma los valores
-			ordenarDeMayorAMenor(copyOfDatValueArray);
-			acumulativeArray = sumarAcumulativamente(copyOfDatValueArray);
+			ordenarObjetosPorPropiedad(copyOfDateValueArray, 'Value');
+			acumulativeArray = sumarElementosAcumulativa(copyOfDateValueArray, 'Value');
+
 
 			//Recorre el array de datos, agrega una nueva celda y le agrega los valores acumulados
-			for (var i = 0; i < copyOfDatValueArray.length; i++) {
+			for (var i = 0; i < copyOfDateValueArray.length; i++) {
 				var newCell = newRow.insertCell(-1);
 				newCell.innerHTML = acumulativeArray[i];
 				// Apply padding and the specified color for this column
@@ -151,7 +163,6 @@
 				newCell.style.backgroundColor = scope.config.backgroundColor;
 				newCell.style.color = scope.config.textColor
 			};
-
 
 			//PORCENTAJES ACUMULADOS
 			//Fila
@@ -170,13 +181,18 @@
 
 			//Recorre las filas viendo si el dato no esta agregado; si no lo está, lo agrega al array
 			for (var i = 0; i < data.Rows.length; i++) {
-				if(!copyTwoOfDatValueArray.includes(data.Rows[i])){
-					copyTwoOfDatValueArray[i] = data.Rows[i].Value;
+				var newCell = newRow.insertCell(-1);
+				// Check if the label exists; if it does, add it to the global array
+				if (data.Rows[i].Label) {
+					if(!copyTwoOfDatValueArray.includes(data.Rows[i].Label)){
+						copyTwoOfDatValueArray[i] = data.Rows[i];
+					}
 				}
 			}
+
 			//Ordena de mayor a menor y suma los valores
-			ordenarDeMayorAMenor(copyTwoOfDatValueArray);
-			copyOfAcumulativeArray = sumarAcumulativamente(copyTwoOfDatValueArray);
+			ordenarObjetosPorPropiedad(copyTwoOfDatValueArray, 'Value');
+			copyOfAcumulativeArray = sumarElementosAcumulativa(copyTwoOfDatValueArray, 'Value');
 			var maximo = copyOfAcumulativeArray.at(-1);
 			acumulativePercentArray = sacarPorcentajesAcumulados(copyOfAcumulativeArray, maximo);
 
@@ -194,29 +210,27 @@
 
 			//FUNCIONES
 
-			// Ordenar el array de mayor a menor
-			function ordenarDeMayorAMenor(array) {
-
-				return array.sort((a, b) => b - a);
-			}
-			
 			//Ordenar el array de mayor a menor por una propiedad
 			function ordenarObjetosPorPropiedad(array, propiedad) {
 
 				return array.sort((a, b) => b[propiedad] - a[propiedad]);
 			}
 
-			//Suma cada objeto del array con el resultado anterior
-			function sumarAcumulativamente(array) {
+			
 
-				const resultado = [Math.round(array[0])]; // Inicializar el array de resultado con el primer elemento del array original
-				
-				for (let i = 0; i < array.length - 1; i++) {
-				  resultado.push(Math.round(parseFloat(resultado[i])) + Math.round(parseFloat(array[i + 1])));
+			function sumarElementosAcumulativa(array, propiedad) {
+				const resultado = [];
+			  
+				let sumaAcumulativa = Math.round(parseFloat(array[0][propiedad]));
+				resultado.push(Math.round(parseFloat(sumaAcumulativa)));
+			  
+				for (let i = 1; i < array.length; i++) {
+				  sumaAcumulativa += Math.round(parseFloat(array[i][propiedad]));
+				  resultado.push(Math.round(parseFloat(sumaAcumulativa)));
 				}
-				
+			  
 				return resultado;
-			}
+			  }
 
 			//Saca los porcentajes acumulados dependiendo del ultimo objeto del array
 			function sacarPorcentajesAcumulados(array, maximo){
@@ -231,6 +245,8 @@
 
 				return resultado;
 			}
+
+			
 
 		}
 			
