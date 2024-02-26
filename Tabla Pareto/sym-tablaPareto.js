@@ -51,7 +51,7 @@
 
 			// Celda de nombre
 			var labelCell = newRow.insertCell(-1);
-			labelCell.innerHTML = "Label";
+			labelCell.innerHTML = "Nombre";
 			labelCell.style.padding = "10px";
 			labelCell.style.verticalAlign = "middle";
 			labelCell.style.backgroundColor = scope.config.labelBackgroundColor;
@@ -66,7 +66,6 @@
 
 					dataLabelArray[i] = data.Rows[i];
 					}
-
 				}
 			}
 
@@ -92,7 +91,7 @@
 			newRow.style.fontSize = scope.config.fontSize + "px";
 			//Celda
 			var labelCell = newRow.insertCell(-1);
-			labelCell.innerHTML = "Value";
+			labelCell.innerHTML = "Valor";
 			labelCell.style.padding = "10px";
 			labelCell.style.verticalAlign = "middle";
 			labelCell.style.backgroundColor = scope.config.labelBackgroundColor;
@@ -194,7 +193,6 @@
 			ordenarObjetosPorPropiedad(copyTwoOfDatValueArray, 'Value');
 			copyOfAcumulativeArray = sumarElementosAcumulativa(copyTwoOfDatValueArray, 'Value');
 			var maximo = encontrarUltimoNumeroString(copyOfAcumulativeArray);
-			console.log(copyOfAcumulativeArray)
 
 			acumulativePercentArray = sacarPorcentajesAcumulados(copyOfAcumulativeArray, maximo);
 
@@ -212,23 +210,10 @@
 
 			//FUNCIONES
 
-			
-			function esNumero(numero) {
-				// Primero, verifica si el dato es un número
-				if (typeof numero !== 'number') {
-				  return false;
-				}
-				// Luego, verifica si es un entero o un flotante
-				return Number.isInteger(numero) || !Number.isNaN(numero);
-			  }
-
 			//Ordenar el array de mayor a menor por una propiedad
 			function ordenarObjetosPorPropiedad(array, propiedad) {
-
 				return array.sort((a, b) => b[propiedad] - a[propiedad]);
 			}
-
-			
 
 			function sumarElementosAcumulativa(array, propiedad) {
 				const resultado = [];
@@ -245,15 +230,15 @@
 			  }
 
 			function encontrarUltimoNumeroString(array) {
-			for (let i = array.length - 1; i >= 0; i--) {
-				const elemento = array[i];
-				if (!isNaN(elemento) && elemento !== '') {
-				// Si el elemento es un número válido en formato string, devuelve su valor
-				return elemento;
+				for (let i = array.length - 1; i >= 0; i--) {
+					const elemento = array[i];
+					if (!isNaN(elemento) && elemento !== '') {
+					// Si el elemento es un número válido en formato string, devuelve su valor
+					return elemento;
+					}
 				}
-			}
-			// Si no se encuentra ningún número válido, devuelve null
-			return null;
+				// Si no se encuentra ningún número válido, devuelve null
+				return null;
 			}
 
 			//Saca los porcentajes acumulados dependiendo del ultimo objeto del array
@@ -268,9 +253,6 @@
 				
 				return resultado;
 			}
-
-			
-
 		}
 			
 	};
@@ -289,12 +271,12 @@
     	        DataShape: 'Table',
     	        Height: 100,
                 Width: 300,
-                textColor: "white",
-				labelColor: "white",
-				labelBackgroundColor: "gray",
-				backgroundColor: "gray",
+                textColor: "black",
+				labelColor: "black",
+				labelBackgroundColor: "#B5DDF3	",
+				backgroundColor: "#E3E7EA",
 				borderColor: "white",
-				fontSize: 20,
+				fontSize: 16,
 				scrolling: "hidden"
             };
         },
